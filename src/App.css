@@ -9,7 +9,7 @@
   right: 0;
   z-index: 60;
   background: white;
-  opacity: 90%;
+  opacity: 90% !important;
 }
 
 
