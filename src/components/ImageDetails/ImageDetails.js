@@ -1,20 +1,61 @@
-import React from 'react'
-import './ImageDetails.css'
+import React, {useState, useEffect} from 'react'
 import { useHistory} from 'react-router-dom';
 import StickyHeader from 'react-sticky-header';
 import Navbar from '../Navbar';
+import './ImageDetails.css'
+
 
 const ImageDetails = (selectedImg) => {
 
+    const history = useHistory();
+    const [img, setImg] = useState({
+        src: "",
+        thumbnail: "",
+        thumbnailWidth: "",
+        thumbnailHeight: "",
+        caption: "",
+        key: ""
+    });
+
     console.log(selectedImg)
     window.scrollTo(0, 0)
-    const history = useHistory();
-    const img = selectedImg.location.state.selectedImg;
+    
+
+    useEffect(() =>
+    {
+
+      if(selectedImg.location.state == undefined)
+      {
+        let str = selectedImg.location.pathname
+        let index  = str.lastIndexOf("/")
+        let id = str.slice(index+1, str.length);
+    
+        const accessKey = process.env.REACT_APP_ACCESSKEY;
+        const url = `https://api.unsplash.com/photos/${id}?client_id=${accessKey}`
+        fetch(url)  .then(res => res.json())
+        .then(data => {console.log(data);
+            setImg({
+                src: data.urls.regular,
+                thumbnail: data.urls.small,
+                thumbnailWidth: data.width/10,
+                thumbnailHeight: data.height/10,
+                caption: data.alt_description,
+                key: data.id
+            })
+        })
+      }
+      else
+      setImg(selectedImg.location.state.selectedImg);
+
+    },[])
+  
+
 
     let showDetails = true;
     if(img.caption == null)
         showDetails = false;
 
+        
     const onClickDownload = () => {
         fetch(img.src)
         .then(resp => resp.blob())
@@ -35,11 +76,7 @@ const ImageDetails = (selectedImg) => {
         history.push('/home')
     }
 
-    let shareData = {
-        title: 'MDN',
-        text: 'Learn web development on MDN!',
-        url: 'https://developer.mozilla.org',
-      }
+
 
     const onClickShare= () =>{
         if (navigator.share) {
