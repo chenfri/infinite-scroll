@@ -28,7 +28,12 @@ import { useHistory } from 'react-router-dom';
 
     useEffect(() => { 
         if(selectedImg.length != 0)
-            history.push('/imageDetails', {selectedImg:selectedImg})
+            // history.push('/imageDetails', {selectedImg:selectedImg})
+            history.push({
+                pathname: '/imageDetails',
+                search: `?query=${selectedImg.key}`,
+                state: { selectedImg: selectedImg }
+            })
     }, [selectedImg])
 
 
