@@ -1,6 +1,6 @@
 import React, {useState, useEffect } from 'react'
 import Gallery from 'react-grid-gallery';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link} from 'react-router-dom';
 
  const GalleryGrid = ({images}) => {
     const history = useHistory();
@@ -28,12 +28,8 @@ import { useHistory } from 'react-router-dom';
 
     useEffect(() => { 
         if(selectedImg.length != 0)
-            // history.push('/imageDetails', {selectedImg:selectedImg})
-            history.push({
-                pathname: '/imageDetails',
-                search: `?query=${selectedImg.key}`,
-                state: { selectedImg: selectedImg }
-            })
+             history.push(`/imageDetails/${selectedImg.key}`, {selectedImg:selectedImg})
+
     }, [selectedImg])
 
 
@@ -46,6 +42,11 @@ import { useHistory } from 'react-router-dom';
                     rowHeight={250}
                     onClickThumbnail={imageClicked}
                     margin={3}/>
+
+            {/* {IMAGES.map(img => {return (
+                <Link to={"/imageDetails/"+ img.key}></Link>
+
+            )})} */}
         </div>
     )
 }

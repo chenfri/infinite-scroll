@@ -78,7 +78,7 @@ const App = () =>{
     <Router>
     <div className="App">
     <Switch>
-      <Route exact path="/imageDetails" component={ImageDetails} />
+      <Route  path="/imageDetails" component={ImageDetails} />
       <Route  path="/" render={()=>(
         
         <Fragment>  

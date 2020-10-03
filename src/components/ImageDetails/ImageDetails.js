@@ -1,10 +1,12 @@
 import React from 'react'
 import './ImageDetails.css'
-import { useHistory } from 'react-router-dom';
+import { useHistory} from 'react-router-dom';
 import StickyHeader from 'react-sticky-header';
 import Navbar from '../Navbar';
 
 const ImageDetails = (selectedImg) => {
+
+    console.log(selectedImg)
     window.scrollTo(0, 0)
     const history = useHistory();
     const img = selectedImg.location.state.selectedImg;
@@ -40,7 +42,6 @@ const ImageDetails = (selectedImg) => {
       }
 
     const onClickShare= () =>{
-        alert("hi");
         if (navigator.share) {
             navigator
               .share({
