@@ -54,17 +54,21 @@ const App = () =>{
 
   const onSearchSubmit = async (searchParam) => {
     window.scrollTo(0, 0)
-    setParam(searchParam);
 
-    const accessKey = process.env.REACT_APP_ACCESSKEY;
-    await fetch(`https://api.unsplash.com/search/photos?query=${searchParam}&per_page=10&client_id=${accessKey}`, {
-    })  .then(res => res.json())
-    .then(data => {console.log(data);
-      setImages([...data.results]);
-      if (nextPage < data.total_pages) {
-        setNextPage(nextPage +1);
-      }
-    })
+    if(searchParam != "")
+    {
+      setParam(searchParam);
+
+      const accessKey = process.env.REACT_APP_ACCESSKEY;
+      await fetch(`https://api.unsplash.com/search/photos?query=${searchParam}&per_page=10&client_id=${accessKey}`, {
+      })  .then(res => res.json())
+      .then(data => {console.log(data);
+        setImages([...data.results]);
+        if (nextPage < data.total_pages) {
+          setNextPage(nextPage +1);
+        }
+      })
+    }
   }
 
 

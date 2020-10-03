@@ -5,7 +5,7 @@ import StickyHeader from 'react-sticky-header';
 import Navbar from '../Navbar';
 
 const ImageDetails = (selectedImg) => {
-
+    window.scrollTo(0, 0)
     const history = useHistory();
     const img = selectedImg.location.state.selectedImg;
 
