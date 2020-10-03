@@ -1,6 +1,7 @@
 import React from 'react'
 import './ImageDetails.css'
 import { useHistory } from 'react-router-dom';
+import StickyHeader from 'react-sticky-header';
 import Navbar from '../Navbar';
 
 const ImageDetails = (selectedImg) => {
@@ -41,7 +42,8 @@ const ImageDetails = (selectedImg) => {
 
     return (
         <div className="mainDiv">
-            <Navbar/>
+
+            <StickyHeader header={<Navbar/>}/>
 
             <div className="firstRow">
                 <button 

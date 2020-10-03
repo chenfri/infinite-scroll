@@ -2,14 +2,14 @@
     font-family:cursive ;
 }
 
+.firstRow{
+    margin-top: 5rem;
+}
+
 .row.sec{
     margin-left: 5vw;
     margin-right:5vw;
     margin-bottom:3vw;
-}
-
-.firstRow{
-    margin-top: 2rem;
 }
 
 .titles{
@@ -22,7 +22,6 @@
 .selected-Img{
     border: 5px solid #b4b9be;
     margin-bottom: 3rem;
-    /* margin-top: 3rem; */
 }
 
 /* Responsive layout - when the screen is less than 600px wide*/
