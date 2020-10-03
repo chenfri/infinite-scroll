@@ -3,17 +3,6 @@
 }
 
 
-/* .sticky{
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 60;
-  opacity: 90%;
-  background: white;
-} */
-
-
 /* Responsive layout - when the screen is less than 600px wide*/
 @media screen and (max-width: 600px) {
  
@@ -28,5 +17,5 @@
 .infiniteScroll
 {
   margin:4rem;
-  padding-top:6rem;
+  padding-top:7rem;
 }

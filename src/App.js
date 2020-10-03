@@ -78,13 +78,9 @@ const App = () =>{
       <Route  path="/" render={()=>(
         
         <Fragment>  
-          <StickyHeader  header={<div style={{position: "fixed",
-  top: "0",
-  left: "0",
-  right: "0",
-  opacity: "90%",
-  backgroundColor: "white"}}>
-            <Navbar/><SearchBar userSubmit={onSearchSubmit}/>
+          <StickyHeader  header=
+            {<div style={{position: "fixed", opacity: "90%",backgroundColor: "white"}}>
+              <Navbar/><SearchBar userSubmit={onSearchSubmit}/>
             </div>}>
           </StickyHeader>
 
