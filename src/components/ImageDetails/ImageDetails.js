@@ -33,9 +33,28 @@ const ImageDetails = (selectedImg) => {
         history.push('/home')
     }
 
+    let shareData = {
+        title: 'MDN',
+        text: 'Learn web development on MDN!',
+        url: 'https://developer.mozilla.org',
+      }
 
     const onClickShare= () =>{
-
+        alert("hi");
+        if (navigator.share) {
+            navigator
+              .share({
+                title: "infinite-scroll image viewer",
+                text: `Sharing this link with you`,
+                url: document.location.href,
+              })
+              .then(() => {
+                console.log('Successfully shared');
+              })
+              .catch(error => {
+                console.error('Something went wrong sharing the blog', error);
+              });
+          }
     }
 
 
