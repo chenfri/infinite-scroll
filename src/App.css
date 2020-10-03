@@ -2,3 +2,12 @@
   text-align: center;
 }
 
+.ReactStickyHeader_fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  background: white;
+  opacity: 90%;
+}

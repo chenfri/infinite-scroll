@@ -1,0 +1,52 @@
+.mainDiv{
+    font-family:cursive ;
+}
+
+.row.sec{
+    margin-left: 5vw;
+    margin-right:5vw;
+    margin-bottom:3vw;
+}
+
+.firstRow{
+    margin-top: 2rem;
+}
+
+.titles{
+    text-align: left;
+}
+
+
+/* ------------- image ---------------- */
+
+.selected-Img{
+    border: 5px solid #b4b9be;
+    margin-bottom: 3rem;
+    /* margin-top: 3rem; */
+}
+
+/* Responsive layout - when the screen is less than 600px wide*/
+@media screen and (max-width: 600px) {
+    .selected-Img{
+        width: 90vw;
+    }
+}
+
+
+/* ------------- buttons ------------- */
+
+.btn{
+ float: right;
+} 
+
+.btn.share{
+    margin-left: 0.5rem;
+    margin-bottom: 0.5rem;
+} 
+
+.btn.back{
+    float: left;
+    margin-left: 2rem;
+    margin-bottom: 1.5rem;
+} 
+
