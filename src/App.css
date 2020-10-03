@@ -3,7 +3,7 @@
 }
 
 
-.sticky{
+/* .sticky{
   position: fixed;
   top: 0;
   left: 0;
@@ -11,7 +11,7 @@
   z-index: 60;
   opacity: 90%;
   background: white;
-}
+} */
 
 
 /* Responsive layout - when the screen is less than 600px wide*/
