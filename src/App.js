@@ -78,12 +78,11 @@ const App = () =>{
       <Route  path="/" render={()=>(
         
         <Fragment>  
-          <StickyHeader  style={{opacity: "90%"}} header={<div>
+          <StickyHeader  header={<div className="sticky">
             <Navbar/><SearchBar userSubmit={onSearchSubmit}/>
             </div>}>
           </StickyHeader>
 
-          {/* {images.map(image => (<ImageDetails img={image}/>  ))} */}
           <InfiniteScroll
             dataLength={images.length}
             next={fetchImages}
