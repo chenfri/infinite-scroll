@@ -1,6 +1,5 @@
-import { render } from '@testing-library/react';
-import {BrowserRouter as Router, Route, Switch , Link} from 'react-router-dom'
-import React, { Component , useState, useEffect , Fragment} from 'react';
+import {BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import React, {useState, useEffect , Fragment} from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import StickyHeader from 'react-sticky-header';
 import SearchBar from './components/SearchBar';
@@ -8,8 +7,8 @@ import GalleryGrid from './components/GalleryGrid'
 import Navbar from './components/Navbar';
 import ImageDetails from './components/ImageDetails/ImageDetails'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import './App.css';
 import 'react-sticky-header/styles.css';
+import './App.css';
 
 const App = () =>{
 
@@ -89,7 +88,7 @@ const App = () =>{
             dataLength={images.length}
             next={fetchImages}
             hasMore={true}
-            style={{margin:"4rem",  paddingTop:"6rem"}}>
+            className = "infiniteScroll">
 
           <GalleryGrid images={images}/>
           </InfiniteScroll>  
