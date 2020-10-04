@@ -5,7 +5,7 @@ import { useHistory} from 'react-router-dom';
  const GalleryGrid = ({images}) => {
     const history = useHistory();
 
-    const [pagePosition, setPagePosition] = useState();
+    const [pagePosition, setPagePosition] = useState(0);
     const [selectedImg, setSelectedImg] = useState([]);
 
     let IMAGES = []

@@ -9,9 +9,11 @@ import './ImageDetails.css'
 
 
 const ImageDetails = (selectedImg) => {
-    window.scrollTo(0, 0)
 
+    window.scrollTo(0, 0)
     const history = useHistory();
+    
+    const [pagePosition, setPagePosition] = useState(0);
     const [img, setImg] = useState({
         src: "",
         thumbnail: "",
@@ -58,8 +60,14 @@ const ImageDetails = (selectedImg) => {
 
         
     const onClickBack= () =>{
-        history.push('/', {pagePosition: selectedImg.location.state.pagePosition,
-             images: selectedImg.location.state.images})
+
+        if(selectedImg.location.state != undefined){
+            setPagePosition(selectedImg.location.state.pagePosition)
+            history.push('/', {pagePosition: pagePosition,
+                images: selectedImg.location.state.images})
+        }
+        else
+            history.push('/')
     }
     
 
