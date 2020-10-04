@@ -1,18 +1,18 @@
 import React, {useState} from 'react'
  
 
-
 const SearchBar = (props) => {
 const [serachVal , setSerachVal] = useState("");
     
+
   const onInputChange = (event) => {
     setSerachVal(event.target.value);
   }
 
+
   const onSearchSubmit = (event) => {
       event.preventDefault();
-      console.log(serachVal);
-        props.userSubmit(serachVal);
+      props.userSubmit(serachVal);
   }
 
  

@@ -5,6 +5,7 @@ import { useHistory} from 'react-router-dom';
  const GalleryGrid = ({images}) => {
     const history = useHistory();
 
+    const [pagePosition, setPagePosition] = useState();
     const [selectedImg, setSelectedImg] = useState([]);
 
     let IMAGES = []
@@ -23,12 +24,15 @@ import { useHistory} from 'react-router-dom';
  
     const imageClicked = (index) => {
         setSelectedImg(IMAGES[index]);
+        setPagePosition(window.pageYOffset)
       }
 
 
     useEffect(() => { 
-        if(selectedImg.length != 0)
-             history.push(`/imageDetails/${selectedImg.key}`, {selectedImg:selectedImg})
+        if(selectedImg.length != 0){
+             history.push(`/imageDetails/${selectedImg.key}`,
+              {selectedImg:selectedImg, pagePosition:pagePosition, pagePosition:pagePosition, images: images})
+        }
 
     }, [selectedImg])
 

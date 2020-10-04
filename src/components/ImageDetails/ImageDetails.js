@@ -1,14 +1,16 @@
-import React, {useState, useEffect } from 'react'
-import { useHistory} from 'react-router-dom';
-import StickyHeader from 'react-sticky-header';
-import Navbar from '../Navbar';
-import './ImageDetails.css'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { ToastContainer, toast } from 'react-toastify';
+import React, {useState, useEffect } from 'react'
+import StickyHeader from 'react-sticky-header';
 import 'react-toastify/dist/ReactToastify.css';
+import { useHistory} from 'react-router-dom';
+import Navbar from '../Navbar';
+import './ImageDetails.css'
+
 
 const ImageDetails = (selectedImg) => {
-   
+    window.scrollTo(0, 0)
+
     const history = useHistory();
     const [img, setImg] = useState({
         src: "",
@@ -19,35 +21,32 @@ const ImageDetails = (selectedImg) => {
         key: ""
     });
 
-    console.log(selectedImg)
-    window.scrollTo(0, 0)
     
-
     useEffect(() =>
     {
-
-      if(selectedImg.location.state == undefined)
-      {
-        let str = selectedImg.location.pathname
-        let index  = str.lastIndexOf("/")
-        let id = str.slice(index+1, str.length);
+        if(selectedImg.location.state == undefined) //getting the shared image from api
+        {
+            //extract image id from the url
+            let str = selectedImg.location.pathname
+            let index  = str.lastIndexOf("/")
+            let id = str.slice(index+1, str.length);
     
-        const accessKey = process.env.REACT_APP_ACCESSKEY;
-        const url = `https://api.unsplash.com/photos/${id}?client_id=${accessKey}`
-        fetch(url)  .then(res => res.json())
-        .then(data => {console.log(data);
-            setImg({
-                src: data.urls.regular,
-                thumbnail: data.urls.small,
-                thumbnailWidth: data.width/10,
-                thumbnailHeight: data.height/10,
-                caption: data.alt_description,
-                key: data.id
+            const accessKey = process.env.REACT_APP_ACCESSKEY;
+            const url = `https://api.unsplash.com/photos/${id}?client_id=${accessKey}`
+            fetch(url)  .then(res => res.json())
+            .then(data => {
+                setImg({
+                    src: data.urls.regular,
+                    thumbnail: data.urls.small,
+                    thumbnailWidth: data.width/10,
+                    thumbnailHeight: data.height/10,
+                    caption: data.alt_description,
+                    key: data.id
+                })
             })
-        })
       }
       else
-      setImg(selectedImg.location.state.selectedImg);
+        setImg(selectedImg.location.state.selectedImg);
 
     },[])
   
@@ -58,6 +57,13 @@ const ImageDetails = (selectedImg) => {
         showDetails = false;
 
         
+    const onClickBack= () =>{
+        history.push('/', {pagePosition: selectedImg.location.state.pagePosition,
+             images: selectedImg.location.state.images})
+    }
+    
+
+    /* The method download the image to 'Downloads' folder */
     const onClickDownload = () => {
         fetch(img.src)
         .then(resp => resp.blob())
@@ -74,14 +80,9 @@ const ImageDetails = (selectedImg) => {
     }
 
 
-    const onClickBack= () =>{
-        history.push('/home')
-    }
-
-
-
+    /* The method handle with sharing an image in two ways  */
     const onClickShare= () =>{
-        if (navigator.share) {
+        if (navigator.share) {//native share for supported platform - like mobile
             navigator
               .share({
                 title: "infinite-scroll image viewer",
@@ -95,7 +96,8 @@ const ImageDetails = (selectedImg) => {
                 console.error('Something went wrong sharing the blog', error);
               });
           }
-          else
+
+          else //for unsupported platform - like web 
             toast.info("Link copied to the clipboard!",{position: toast.POSITION.BOTTOM_RIGHT,})
     }
 
