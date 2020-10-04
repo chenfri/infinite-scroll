@@ -1,6 +1,6 @@
 import React, {useState, useEffect } from 'react'
 import Gallery from 'react-grid-gallery';
-import { useHistory, Link} from 'react-router-dom';
+import { useHistory} from 'react-router-dom';
 
  const GalleryGrid = ({images}) => {
     const history = useHistory();
@@ -37,16 +37,11 @@ import { useHistory, Link} from 'react-router-dom';
     return (
         <div>
             <Gallery images={IMAGES}
-                    enableImageSelection={false}
-                    enableLightbox={false}
-                    rowHeight={250}
-                    onClickThumbnail={imageClicked}
-                    margin={3}/>
-
-            {/* {IMAGES.map(img => {return (
-                <Link to={"/imageDetails/"+ img.key}></Link>
-
-            )})} */}
+                enableImageSelection={false}
+                enableLightbox={false}
+                rowHeight={250}
+                onClickThumbnail={imageClicked}
+                margin={3}/>
         </div>
     )
 }

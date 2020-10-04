@@ -34,7 +34,7 @@ const [serachVal , setSerachVal] = useState("");
                   <button 
                     type="submit"
                     class="btn btn-primary" 
-                    onClick={onSearchSubmit}>Search</button>
+                    onClick={onSearchSubmit}>Search<i class="fas fa-search" style={{marginLeft: "0.5vw"}}></i></button>
                     </div>
               </form>
 

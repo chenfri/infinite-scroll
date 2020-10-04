@@ -1,12 +1,14 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect } from 'react'
 import { useHistory} from 'react-router-dom';
 import StickyHeader from 'react-sticky-header';
 import Navbar from '../Navbar';
 import './ImageDetails.css'
-
+import { CopyToClipboard } from 'react-copy-to-clipboard'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ImageDetails = (selectedImg) => {
-
+   
     const history = useHistory();
     const [img, setImg] = useState({
         src: "",
@@ -93,6 +95,8 @@ const ImageDetails = (selectedImg) => {
                 console.error('Something went wrong sharing the blog', error);
               });
           }
+          else
+            toast.info("Link copied to the clipboard!",{position: toast.POSITION.BOTTOM_RIGHT,})
     }
 
 
@@ -106,7 +110,7 @@ const ImageDetails = (selectedImg) => {
                 <button 
                         type="button"
                         class="btn btn-primary back" 
-                        onClick={onClickBack}>Back</button>
+                        onClick={onClickBack}><i class="fas fa-angle-left"></i>Back</button>
 
                 <img className="selected-Img" key={img.key} src={img.thumbnail}/>
             </div>
@@ -116,17 +120,19 @@ const ImageDetails = (selectedImg) => {
                 <h6>{img.caption}</h6></div>): (null)} 
 
                 <div className="col">
+                <CopyToClipboard text={window.location.href}>
                     <button 
                         type="button"
                         class="btn btn-primary share" 
-                        onClick={onClickShare}>Share</button>
+                        onClick={onClickShare}>Share<i class="fas fa-share-alt left"></i></button>
+                      </CopyToClipboard>
                     <button 
                         type="button"
                         class="btn btn-primary download" 
-                        onClick={onClickDownload}>Download</button>
+                        onClick={onClickDownload}>Download<i class="fas fa-download left"></i></button>
                 </div>
             </div>
-            
+            <ToastContainer />
         </div>
     )
 }

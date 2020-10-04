@@ -49,3 +49,11 @@
     margin-bottom: 1.5rem;
 } 
 
+
+.fas.left{
+    margin-left: 0.5vw;
+}
+
+.fa-angle-left{
+    margin-right: 0.3vw;
+}
