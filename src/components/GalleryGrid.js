@@ -31,7 +31,7 @@ import { useHistory} from 'react-router-dom';
     useEffect(() => { 
         if(selectedImg.length != 0){
              history.push(`/imageDetails/${selectedImg.key}`,
-              {selectedImg:selectedImg, pagePosition:pagePosition, pagePosition:pagePosition, images: images})
+              {selectedImg:selectedImg, pagePosition:pagePosition, images: images})
         }
 
     }, [selectedImg])
