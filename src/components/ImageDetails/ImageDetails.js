@@ -13,7 +13,7 @@ const ImageDetails = (selectedImg) => {
     window.scrollTo(0, 0)
     const history = useHistory();
     
-    const [img, setImg] = useState({
+    const [img, setImg] = useState({ /* the image that displyed on 'image Details' page*/ 
         src: "",
         thumbnail: "",
         thumbnailWidth: "",
@@ -25,15 +25,13 @@ const ImageDetails = (selectedImg) => {
     
     useEffect(() =>
     {
-        if(selectedImg.location.state == undefined) //getting the shared image from api
+        if(selectedImg.location.state === undefined) //getting the shared image from api
         {
-            //extract image id from the url
-            let str = selectedImg.location.pathname
-            let index  = str.lastIndexOf("/")
-            let id = str.slice(index+1, str.length);
-    
+
+            let id = selectedImg.match.params.id
             const accessKey = process.env.REACT_APP_ACCESSKEY;
             const url = `https://api.unsplash.com/photos/${id}?client_id=${accessKey}`
+
             fetch(url)  .then(res => res.json())
             .then(data => {
                 setImg({
@@ -52,15 +50,10 @@ const ImageDetails = (selectedImg) => {
     },[])
   
 
-
-    let showDetails = true;
-    if(img.caption == null)
-        showDetails = false;
-
         
     const onClickBack= () =>{
 
-        if(selectedImg.location.state != undefined){
+        if(selectedImg.location.state !== undefined){
             history.push('/', {pagePosition: selectedImg.location.state.pagePosition,
                 images: selectedImg.location.state.images})
         }
@@ -71,14 +64,15 @@ const ImageDetails = (selectedImg) => {
 
     /* The method download the image to 'Downloads' folder */
     const onClickDownload = () => {
-        fetch(img.src)
-        .then(resp => resp.blob())
+
+        fetch(img.src).then(resp => resp.blob())
         .then(blob => {
           const url = window.URL.createObjectURL(blob);
           const a = document.createElement('a');
+
           a.style.display = 'none';
           a.href = url;
-          a.download = 'newImg.jpg';
+          a.download = img.key;
           document.body.appendChild(a);
           a.click();
           window.URL.revokeObjectURL(url);
@@ -88,7 +82,7 @@ const ImageDetails = (selectedImg) => {
 
     /* The method handle with sharing an image in two ways  */
     const onClickShare= () =>{
-        if (navigator.share) {//native share for supported platform - like mobile
+        if (navigator.share) {  /*native share for supported platform - like mobile*/
             navigator
               .share({
                 title: "infinite-scroll image viewer",
@@ -103,8 +97,8 @@ const ImageDetails = (selectedImg) => {
               });
           }
 
-          else //for unsupported platform - like web 
-            toast.info("Link copied to the clipboard!",{position: toast.POSITION.BOTTOM_RIGHT,})
+          else //for unsupported platform - like browser 
+            toast.info("Link copied to the clipboard!",{position: toast.POSITION.BOTTOM_CENTER,})
     }
 
 
@@ -124,7 +118,7 @@ const ImageDetails = (selectedImg) => {
             </div>
             
             <div className="row sec">
-                {showDetails ? (<div className="titles col"><h6 >Image details:</h6>
+                {img.caption ? (<div className="titles col"><h6 >Image details:</h6>
                 <h6>{img.caption}</h6></div>): (null)} 
 
                 <div className="col">

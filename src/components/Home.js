@@ -9,11 +9,15 @@ import Navbar from './Navbar';
 
 const Home = (pagePosition) => {
 
-    const history = useHistory();
-    const [images, setImages] = useState([]);
-    const [param, setParam] = useState("");
-    const [nextPage, setNextPage] = useState(1);
-    const [scrollPosition, setScrollPosition] = useState(0);
+    const history = useHistory(); /* for navigate between components */
+
+    const [images, setImages] = useState([]); /* images that displayed on the screen */
+
+    const [param, setParam] = useState(""); /* user input for search an image */
+
+    const [nextPage, setNextPage] = useState(1); /* next page we get images from */
+
+    const [scrollPosition, setScrollPosition] = useState(0); /*scroll position for 'back button' case */
 
 
     window.onbeforeunload = (e) => {
@@ -24,10 +28,10 @@ const Home = (pagePosition) => {
     
     useEffect(() =>
     {
-        if(scrollPosition > 0)
+        if(scrollPosition > 0) //if we have props from previous page
         {
-            if (document.documentElement.clientWidth > 1000) //offest for larger width screen
-                window.scrollTo(0, scrollPosition + 200);
+            if (document.documentElement.clientWidth > 1000)
+                window.scrollTo(0, scrollPosition + 200); //offest for larger width screen
             else
                 window.scrollTo(0, scrollPosition);
         }
@@ -39,7 +43,7 @@ const Home = (pagePosition) => {
 
     useEffect(() =>
     {
-        if(pagePosition.location.state != undefined) //if there are props from previous page
+        if(pagePosition.location.state !== undefined) //if there are props from previous page
         {
             setImages([...pagePosition.location.state.images])
             setScrollPosition(pagePosition.location.state.pagePosition);
@@ -60,20 +64,20 @@ const Home = (pagePosition) => {
       {
         url = `https://api.unsplash.com/search/photos?query=${param}&page=${nextPage}&per_page=10&client_id=${accessKey}`
   
-      fetch(url)  .then(res => res.json())
-      .then(data => {console.log(data);
+      fetch(url).then(res => res.json())
+      .then(data => {
           setImages([...images, ...data.results]);
   
           if (nextPage < data.total_pages) {
             setNextPage(nextPage +1);
           }
-      })
+        })
       }
-      else //search random photos
+      else //get random photos
       {
         url = `https://api.unsplash.com/photos/random?&client_id=${accessKey}&count=25`
-        fetch(url)  .then(res => res.json())
-        .then(data => {console.log(data);
+        fetch(url).then(res => res.json())
+        .then(data => {
             setImages([...images, ...data]);
         })
       }
@@ -83,16 +87,17 @@ const Home = (pagePosition) => {
   /* The method handle with searching photos by user input */
     const onSearchSubmit = async (searchParam) => {
         
-      if(searchParam != "") 
+      if(searchParam !== "") 
       {
         setParam(searchParam);
-  
         const accessKey = process.env.REACT_APP_ACCESSKEY;
-        await fetch(`https://api.unsplash.com/search/photos?query=${searchParam}&per_page=10&client_id=${accessKey}`, {
-        })  .then(res => res.json())
-        .then(data => {console.log(data);
+        const url = `https://api.unsplash.com/search/photos?query=${searchParam}&per_page=10&client_id=${accessKey}`
+
+        await fetch(url).then(res => res.json())
+        .then(data => {
           window.scrollTo(0, 0)
           setImages([...data.results]);
+          
           if (nextPage < data.total_pages) {
             setNextPage(nextPage +1);
           }
@@ -110,14 +115,14 @@ const Home = (pagePosition) => {
                 </div>}>
             </StickyHeader>
 
-          <InfiniteScroll
+            <InfiniteScroll
             dataLength={images.length}
             next={fetchImages}
             hasMore={true}
             className = "infiniteScroll">
 
-          <GalleryGrid images={images}/>
-          </InfiniteScroll> 
+                <GalleryGrid images={images}/>
+            </InfiniteScroll> 
         </div>
     )
 }

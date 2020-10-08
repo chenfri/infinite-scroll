@@ -6,11 +6,12 @@ import { useHistory} from 'react-router-dom';
     const history = useHistory();
 
     const [pagePosition, setPagePosition] = useState(0);
-    const [selectedImg, setSelectedImg] = useState([]);
+    const [selectedImg, setSelectedImg] = useState([]); /* image clicked by the user */
 
     let IMAGES = []
+
     images.forEach(img => {
-        IMAGES.push(
+        IMAGES.push(    /*build array of images for Gallery component*/
          {
             src: img.urls.regular,
             thumbnail: img.urls.small,
@@ -29,7 +30,7 @@ import { useHistory} from 'react-router-dom';
 
 
     useEffect(() => { 
-        if(selectedImg.length != 0){
+        if(selectedImg.length !== 0){
              history.push(`/imageDetails/${selectedImg.key}`,
               {selectedImg:selectedImg, pagePosition:pagePosition, images: images})
         }
