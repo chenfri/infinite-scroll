@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
  
 
-const SearchBar = (props) => {
+const SearchBar = ({userSubmit}) => {
 const [serachVal , setSerachVal] = useState("");
     
 
@@ -9,17 +9,11 @@ const [serachVal , setSerachVal] = useState("");
     setSerachVal(event.target.value);
   }
 
-
-  const onSearchSubmit = (event) => {
-      event.preventDefault();
-      props.userSubmit(serachVal);
-  }
-
  
       return (
           <div style={{fontFamily:"cursive"}}>
               <form
-                onSubmit={onSearchSubmit} 
+                onSubmit={()=>{userSubmit(serachVal)}}
                 className="container">
                 <div
                     className="row"
@@ -34,7 +28,7 @@ const [serachVal , setSerachVal] = useState("");
                   <button 
                     type="submit"
                     class="btn btn-primary" 
-                    onClick={onSearchSubmit}>Search<i class="fas fa-search" style={{marginLeft: "0.5vw"}}></i></button>
+                    onClick={()=>{userSubmit(serachVal)}}>Search<i class="fas fa-search" style={{marginLeft: "0.5vw"}}></i></button>
                     </div>
               </form>
 

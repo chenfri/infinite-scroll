@@ -8,7 +8,7 @@ import Navbar from './Navbar';
 
 
 const Home = (pagePosition) => {
-
+console.log(pagePosition)
     const history = useHistory(); /* for navigate between components */
 
     const [images, setImages] = useState([]); /* images that displayed on the screen */
@@ -43,7 +43,8 @@ const Home = (pagePosition) => {
 
     useEffect(() =>
     {
-        if(pagePosition.location.state !== undefined) //if there are props from previous page
+        //if there are props from previous page
+        if(pagePosition.location.state != undefined || pagePosition.location.state != null) 
         {
             setImages([...pagePosition.location.state.images])
             setScrollPosition(pagePosition.location.state.pagePosition);
