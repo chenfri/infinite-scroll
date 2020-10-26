@@ -9,13 +9,13 @@ import './App.css';
 
 const App = () =>{
   
-
+// check branch
   return (
     <Router>
       <div className="App">
         <Switch>
           <Route exact path="/imageDetails/:id" component={ImageDetails} />
-          <Route  path="/" component={Home}/>
+          {/* <Route  path="/" component={Home}/> */}
         </Switch>
       </div>
     </Router>
